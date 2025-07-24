@@ -62,7 +62,7 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 
-class Product(models.Model):
+class Estate(models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name='Название'
@@ -107,10 +107,15 @@ class Product(models.Model):
         related_name='products_by_district'
     )
 
-    geo = models.JSONField(
-        verbose_name='Геолокация',
-        help_text='JSON-объект с координатами или адресом'
+    image = models.ImageField(
+        upload_to='images/',
+        verbose_name='Изображение'
     )
+
+    geo = models.TextField(
+            verbose_name='Местоположение'
+    )
+
 
     promo_video = models.FileField(
         upload_to='videos/',
@@ -141,3 +146,16 @@ class Product(models.Model):
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
 
+
+class Image(models.Model):
+    estate = models.ForeignKey(
+        'Estate',
+        on_delete=models.CASCADE,
+        verbose_name='Объявление',
+        related_name='images'
+    )
+
+    image = models.ImageField(
+        upload_to='images/',
+        verbose_name='Изображения'
+    )
