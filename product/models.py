@@ -51,6 +51,10 @@ class Category(models.Model):
         verbose_name='Родительская категория'
     )
 
+    image = models.ImageField(
+            upload_to='categories_images/',
+            verbose_name='Изображение категории',
+    )
 
     def __str__(self):
         if self.parent:

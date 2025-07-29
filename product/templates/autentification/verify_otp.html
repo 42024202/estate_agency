@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+  <h2 class="mb-4 text-center">Подтверждение входа</h2>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_otp" class="form-label">Введите код из письма:</label>
+      <input type="text" name="otp" id="id_otp" maxlength="6" required autofocus class="form-control" placeholder="6-значный код">
+    </div>
+
+    {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    {% endif %}
+    
+    {% if message %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    {% endif %}
+
+    <button type="submit" name="action" value="verify" class="btn btn-primary w-100 mb-3">Подтвердить</button>
+    <button type="submit" name="action" value="resend" class="btn btn-outline-secondary w-100">Отправить код заново</button>
+  </form>
+</div>
+{% endblock %}
+

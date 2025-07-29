@@ -28,9 +28,9 @@ https://templatemo.com/tm-561-purple-buzz
  <!-- Header -->
     <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand h1" href="index.html">
+            <a class="navbar-brand h1" href="{% url 'index' %}">
                 <i class='bx bx-buildings bx-sm text-dark'></i>
-                <span class="text-dark h4">House</span> <span class="text-primary h4">KG</span>
+                <span class="text-dark h4">Corona</span> <span class="text-primary h4">estate</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,13 +55,23 @@ https://templatemo.com/tm-561-purple-buzz
                             <a class="nav-link btn-outline-primary rounded-pill px-3" href="contact.html">Contact</a>
                         </li>
                     </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-                    <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
-                    <a class="nav-link" href="#"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
-                </div>
-            </div>
+<div class="navbar align-self-center d-flex">
+    <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
+    <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
+    <div class="nav-link dropdown">
+        <i class='bx bx-user-circle bx-sm text-primary dropdown-toggle' role="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+            {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'index' %}">Профиль</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Войти</a></li>
+                <li><a class="dropdown-item" href="{% url 'register' %}">Регистрация</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+        
         </div>
     </nav>
     <!-- Close Header -->
